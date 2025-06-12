@@ -33,24 +33,34 @@ public:
 		}
 	}
 
+	void resize(int newSize)
+	{
+		if (newSize < currentCapacity)
+		{
+			return;
+		}
 
+		T* temp = new T[newSize];
+		for (int i = 0; i < currentSize; ++i)
+		{
+			temp[i] = data[i];
+		}
+		delete[] data;
+		data = temp;
+
+		currentCapacity = newSize;
+		cout << "resized" << endl;
+	}
 
 	void push_back(T value)
 	{
-		if (currentCapacity <= currentSize)
+		if (currentSize >= currentCapacity)
 		{
-			T* temp = new T[currentCapacity + 5];
-			for (int i = 0; i < currentSize; ++i)
-			{
-				temp[i] = data[i];
-			}
-			delete[] data;
-			data = temp;
-			currentCapacity += 5;
+			resize(currentCapacity + 5);
 		}
 		*(data + currentSize) = value;
 		++currentSize;
-
+		cout << " push_back called" << endl;
 	}
 
 	void pop_back()
@@ -72,23 +82,7 @@ public:
 		return currentCapacity;
 	}
 
-	void resize(int newSize)
-	{
-		if (newSize < currentCapacity)
-		{
-			return;
-		}
-
-		T* temp = new T[newSize];
-		for (int i = 0; i < currentSize; ++i)
-		{
-			temp[i] = data[i];
-		}
-		delete[] data;
-		data = temp;
-
-		currentCapacity = newSize;
-	}
+	
 
 	void sortData()
 	{
@@ -109,27 +103,55 @@ public:
 };
 
 
-int main() {
-	SimpleVector<char> vec1;
-	vec1.push_back('c');
-	vec1.push_back('a');
-	vec1.push_back('b');
-	SimpleVector<char> vec2(vec1);
 
-	cout << "vec1 " << vec1[0] << " " << vec1[1] << " " << vec1[2] << endl;
-	cout << vec1.size() << endl;
-	cout << vec1.capacity() << endl;
 
-	vec1.pop_back();
-	vec1.sortData();
-	vec1.resize(15);
-
-	cout << "vec1 " << vec1[0] << " " << vec1[1] << endl;
-	cout << vec1.size() << endl;
-	cout << vec1.capacity() << endl;
-
-	cout << "vec2 " << vec2[0] << " " << vec2[1] << " " << vec2[2] << endl;
-	cout << vec2.size() << endl;
-	cout << vec2.capacity() << endl;
-
-}
+//int main() {
+//	SimpleVector<char> vec1;
+//	vec1.push_back('c');
+//	vec1.push_back('a');
+//	vec1.push_back('b');
+//	SimpleVector<char> vec2(vec1);
+//
+//	cout << "vec1 " << vec1[0] << " " << vec1[1] << " " << vec1[2] << endl;
+//	cout << vec1.size() << endl;
+//	cout << vec1.capacity() << endl;
+//
+//	vec1.pop_back();
+//	vec1.sortData();
+//	vec1.resize(15);
+//
+//	cout << "vec1 " << vec1[0] << " " << vec1[1] << endl;
+//	cout << vec1.size() << endl;
+//	cout << vec1.capacity() << endl;
+//
+//	cout << "vec2 " << vec2[0] << " " << vec2[1] << " " << vec2[2] << endl;
+//	cout << vec2.size() << endl;
+//	cout << vec2.capacity() << endl;
+//
+//	vec1.push_back('c');
+//	vec1.push_back('a');
+//	vec1.push_back('b');
+//	vec1.push_back('c');
+//	vec1.push_back('a');
+//	vec1.push_back('b');
+//	vec1.push_back('c');
+//	vec1.push_back('a');
+//	vec1.push_back('b');
+//	vec1.push_back('c');
+//	vec1.push_back('a');
+//	vec1.push_back('b');
+//	vec1.push_back('c');
+//	vec1.push_back('a');
+//	vec1.push_back('b');
+//	vec1.push_back('c');
+//	vec1.push_back('a');
+//	vec1.push_back('b');
+//	vec1.push_back('b');
+//
+//	for (int i = 0; i < vec1.size(); ++i)
+//	{
+//		cout << vec1[i] << endl;
+//	}
+//	cout << vec1.size() << endl;
+//	cout << vec1.capacity() << endl;
+//}
